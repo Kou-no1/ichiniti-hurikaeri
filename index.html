@@ -145,6 +145,43 @@ dialog h2 { font-size: 19px; margin: 0 0 16px; }
 dialog p { font-size: 14px; line-height: 1.8; }
 dialog .dialog-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 22px; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+.output-switch { display:flex; gap:6px; flex-wrap:wrap; }
+.output-switch button[aria-pressed="true"] { background:#e5eee7; border-color:#709583; }
+.form2-sheet { position:absolute; top:0; left:0; transform-origin:top left; width:210mm; height:297mm; padding:9mm; background:#fff; box-shadow:0 4px 24px #25382b1c; color:#111; font-family:"BIZ UDPGothic","Yu Gothic","Hiragino Kaku Gothic ProN","Noto Sans CJK JP","Meiryo",sans-serif; }
+.form2-content { width:192mm; height:278mm; display:grid; grid-template-rows:25mm 14mm 1fr 32mm; }
+.form2-title-row { display:grid; grid-template-columns:1.3fr 1fr; border:.35mm solid #111; }
+.form2-title { display:flex; align-items:center; justify-content:center; font-size:22pt; font-weight:700; letter-spacing:.22em; }
+.form2-away { display:grid; grid-template-rows:1fr 1fr; border-left:.3mm solid #111; }
+.form2-away-label { display:flex; align-items:center; justify-content:center; font-size:10.5pt; font-weight:700; border-bottom:.25mm solid #111; }
+.form2-away-value { display:flex; align-items:center; justify-content:center; font-size:13pt; font-weight:700; }
+.form2-meta { display:grid; grid-template-columns:1.3fr .8fr .8fr 1.2fr; border-left:.35mm solid #111; border-right:.35mm solid #111; border-bottom:.35mm solid #111; }
+.form2-meta-cell { display:flex; align-items:center; justify-content:center; min-width:0; padding:1.3mm 2mm; font-size:12pt; border-right:.25mm solid #111; }
+.form2-meta-cell:last-child { border-right:0; }
+.form2-meta-cell b { margin-right:2mm; white-space:nowrap; }
+.form2-table { width:100%; height:100%; table-layout:fixed; border-collapse:collapse; border-left:.35mm solid #111; border-right:.35mm solid #111; border-bottom:.35mm solid #111; }
+.form2-table th,.form2-table td { border:.25mm solid #111; padding:1.2mm 1.6mm; vertical-align:middle; }
+.form2-table thead th { height:10mm; text-align:center; font-size:12pt; font-weight:700; }
+.form2-table .time { width:9%; text-align:center; font-size:13pt; font-weight:700; }
+.form2-table .subject { width:20%; text-align:center; font-size:11pt; }
+.form2-table .content { width:56%; font-size:10.5pt; line-height:1.35; white-space:pre-wrap; overflow-wrap:anywhere; }
+.form2-table .relief { width:15%; }
+.form2-table tbody tr.std { height:17mm; }
+.form2-table tbody tr.compact { height:13mm; }
+.form2-table tbody tr.contact { height:18mm; }
+.form2-table .subject-text { font-weight:700; }
+.form2-table .management-blank { height:100%; min-height:7mm; }
+.form2-notes { border:.35mm solid #111; border-top:0; padding:2mm 3mm; font-size:8.8pt; line-height:1.45; }
+.form2-notes strong { display:block; margin-bottom:1mm; font-size:9.5pt; }
+.form2-notes ul { margin:0; padding-left:5mm; }
+.form2-notes li { margin:.4mm 0; }
+.admin-only { border-top:1px solid #e5eae5; margin-top:14px; padding-top:14px; }
+.admin-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.admin-grid .full { grid-column:1/-1; }
+.form2-only-badge { display:inline-flex; margin-left:6px; padding:2px 6px; border-radius:10px; background:#f0f2f0; color:#607168; font-size:10px; vertical-align:middle; }
+body[data-output="student"] .form2-sheet { display:none; }
+body[data-output="form2"] .sheet { display:none; }
+
 @media screen and (max-width: 1050px) {
   .workspace { display: block; max-width: 820px; padding: 18px; }
   .preview-panel { position: static; margin-top: 24px; }
@@ -172,12 +209,14 @@ dialog .dialog-actions { display: flex; justify-content: flex-end; gap: 10px; ma
   html, body { width: 192mm; margin: 0 !important; padding: 0 !important; background: #fff; }
   .no-print, .topbar, .editor-column, .preview-top, .print-status, .print-note, .toast, dialog { display: none !important; }
   .workspace, .preview-panel, .preview-viewport, .paper-holder { display: block !important; position: static !important; width: 192mm !important; height: auto !important; max-width: none !important; max-height: none !important; overflow: visible !important; border: 0 !important; margin: 0 !important; padding: 0 !important; background: #fff !important; box-shadow: none !important; }
-  .sheet { position: static !important; transform: none !important; width: 192mm; height: 278mm; padding: 0; margin: 0; box-shadow: none; border: 0; break-inside: avoid; page-break-inside: avoid; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
-  .paper-content { margin: 0; }
+  .sheet, .form2-sheet { position: static !important; transform: none !important; width: 192mm; height: 278mm; padding: 0; margin: 0; box-shadow: none; border: 0; break-inside: avoid; page-break-inside: avoid; print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  body[data-output="student"] .form2-sheet { display:none !important; }
+  body[data-output="form2"] .sheet { display:none !important; }
+  .paper-content, .form2-content { margin: 0; }
   .schedule-table, .diary, .identity, .goal, tr { break-inside: avoid; page-break-inside: avoid; }
   .fit-overflow { outline: none; background: transparent; }
   body.print-blocked .sheet { display: none !important; }
-  body.print-blocked .print-block-message { display: block; padding: 15mm; font-size: 14pt; line-height: 1.9; }
+  body[data-output="student"].print-blocked .print-block-message { display: block; padding: 15mm; font-size: 14pt; line-height: 1.9; }
 }
 </style>
 </head>
@@ -185,7 +224,7 @@ dialog .dialog-actions { display: flex; justify-content: flex-end; gap: 10px; ma
 <header class="topbar no-print">
   <div class="topbar-inner">
     <div class="brand"><span class="brand-icon" aria-hidden="true"><i></i><i></i><i></i></span><div><strong>ふりかえりシート作成</strong><p>先生が入力。子どもたちは、紙に書く。</p></div></div>
-    <div class="actions"><span class="badge">A4縦・1枚</span><button id="pdfBtn" type="button">PDF保存</button><button id="printBtn" type="button" class="primary">印刷</button></div>
+    <div class="actions"><span class="badge" id="outputBadge">児童用・A4縦</span><button id="pdfBtn" type="button">PDF保存</button><button id="printBtn" type="button" class="primary">印刷</button></div>
   </div>
 </header>
 <main class="workspace">
@@ -197,7 +236,16 @@ dialog .dialog-actions { display: flex; justify-content: flex-end; gap: 10px; ma
           <div class="field"><label for="date">日付</label><input id="date" type="date" data-field="date"></div>
           <div class="field"><label for="grade">学年</label><input id="grade" data-field="grade" placeholder="例：5年" maxlength="30"></div>
           <div class="field"><label for="className">組</label><input id="className" data-field="className" placeholder="例：1組" maxlength="30"></div>
-          <div class="field full"><label for="teacherMessage">先生からの一言・ミッション</label><textarea id="teacherMessage" rows="3" data-field="teacherMessage" placeholder="時間を見て行動しよう。&#10;友だちと声をかけ合って過ごそう。" maxlength="2000"></textarea><p class="help">名前欄の右隣に入ります。短い文で2〜3行が目安です。</p></div>
+          <div class="field"><label for="teacherName">担任名 <span class="form2-only-badge">様式2</span></label><input id="teacherName" data-field="teacherName" placeholder="例：野村" maxlength="50"></div>
+          <div class="field"><label for="leaveTime">教室を出る時刻 <span class="form2-only-badge">様式2</span></label><input id="leaveTime" type="time" data-field="leaveTime"><p class="help">空欄なら「1日不在」と表示します。</p></div>
+          <div class="field full"><label for="teacherMessage">先生からの一言・ミッション</label><textarea id="teacherMessage" rows="3" data-field="teacherMessage" placeholder="時間を見て行動しよう。&#10;友だちと声をかけ合って過ごそう。" maxlength="2000"></textarea><p class="help">児童用シートの名前欄の右隣に入ります。</p></div>
+        </div>
+        <div class="admin-only">
+          <div class="admin-grid">
+            <div><label for="beforeTask">業前の内容・資料等 <span class="form2-only-badge">様式2</span></label><textarea id="beforeTask" rows="2" data-field="beforeTask" placeholder="例：朝読書、健康観察など" maxlength="2000"></textarea></div>
+            <div><label for="afterTask">帰りの会の内容・資料等 <span class="form2-only-badge">様式2</span></label><textarea id="afterTask" rows="2" data-field="afterTask" placeholder="例：連絡帳、配付物、下校確認など" maxlength="2000"></textarea></div>
+            <div class="full"><label for="adminNotes">連絡事項 <span class="form2-only-badge">様式2</span></label><textarea id="adminNotes" rows="2" data-field="adminNotes" placeholder="管理職・補欠者へ伝えておきたいこと" maxlength="3000"></textarea></div>
+          </div>
         </div>
       </div>
     </section>
@@ -212,7 +260,7 @@ dialog .dialog-actions { display: flex; justify-content: flex-end; gap: 10px; ma
     </section>
   </div>
   <section class="preview-panel" id="previewPanel" aria-labelledby="previewHeading">
-    <div class="preview-top no-print"><div><h2 id="previewHeading">印刷プレビュー</h2><p>画面では縮小表示。印刷はA4サイズです。</p></div><div class="preview-controls"><button type="button" id="fitBtn" class="small" aria-pressed="true">幅に合わせる</button><button type="button" id="actualBtn" class="small" aria-pressed="false">100%</button></div></div>
+    <div class="preview-top no-print"><div><h2 id="previewHeading">印刷プレビュー</h2><p id="previewDescription">児童用「一日のふりかえり」を表示しています。</p></div><div><div class="output-switch" aria-label="出力する様式"><button type="button" id="studentViewBtn" class="small" aria-pressed="true">児童用</button><button type="button" id="form2ViewBtn" class="small" aria-pressed="false">様式2</button></div><div class="preview-controls" style="margin-top:6px"><button type="button" id="fitBtn" class="small" aria-pressed="true">幅に合わせる</button><button type="button" id="actualBtn" class="small" aria-pressed="false">100%</button></div></div></div>
     <div class="preview-viewport" id="previewViewport"><div class="paper-holder" id="paperHolder">
       <article class="sheet" id="sheet" aria-label="児童が紙に記入する一日のふりかえり">
         <div class="paper-content">
@@ -238,9 +286,29 @@ dialog .dialog-actions { display: flex; justify-content: flex-end; gap: 10px; ma
           <footer class="paper-footer"><span>書けたら、帰る前に提出しましょう。</span><span class="final-check"><span><i class="check-square" aria-hidden="true"></i>名前</span><span><i class="check-square" aria-hidden="true"></i>目標</span><span><i class="check-square" aria-hidden="true"></i>ふりかえり</span></span></footer>
         </div>
       </article>
+      <article class="form2-sheet" id="form2Sheet" aria-label="管理職提出用の補欠計画">
+        <div class="form2-content">
+          <header class="form2-title-row">
+            <div class="form2-title">補 欠 計 画</div>
+            <div class="form2-away"><div class="form2-away-label">1日不在・教室を出る時間</div><div class="form2-away-value" id="form2Away">1日不在</div></div>
+          </header>
+          <div class="form2-meta">
+            <div class="form2-meta-cell" id="form2Date">　月　日（　）</div>
+            <div class="form2-meta-cell"><span id="form2Grade">　</span><b>年</b></div>
+            <div class="form2-meta-cell"><span id="form2Class">　</span><b>組</b></div>
+            <div class="form2-meta-cell"><b>担任</b><span id="form2Teacher"></span></div>
+          </div>
+          <table class="form2-table">
+            <colgroup><col class="time"><col class="subject"><col class="content"><col class="relief"></colgroup>
+            <thead><tr><th>時</th><th>教科等</th><th>内容・資料等</th><th>補欠者</th></tr></thead>
+            <tbody id="form2Rows"></tbody>
+          </table>
+          <div class="form2-notes"><strong>補欠計画注意事項</strong><ul><li>出張の際は、前日までに主幹（教務主任）へ提出する。</li><li>児童用に教室掲示も行う。</li><li>時間いっぱい・分かりやすい・どの補欠者でも対応できる課題を出すこと。</li><li>自習で使用する教材等は、教卓・机等に分かりやすく置くこと。</li><li>事前に補欠者への連絡も可能な限り行うこと。</li></ul></div>
+        </div>
+      </article>
     </div></div>
     <div id="printStatus" class="print-status no-print" role="status" aria-live="polite">レイアウトを確認しています。</div>
-    <p class="print-note no-print">印刷設定：A4／縦／倍率100%／ヘッダーとフッターなし。<br>PDF保存は、印刷画面で保存先を「PDFに保存」に切り替えます。</p>
+    <p class="print-note no-print">印刷設定：A4／縦／倍率100%／ヘッダーとフッターなし。<br>上の「児童用／様式2」で出力を切り替えられます。</p>
   </section>
 </main>
 <div class="print-block-message"><strong>シートを印刷する前に確認してください。</strong><p>文字が枠に入りきらない箇所があります。印刷をキャンセルして、アプリのお知らせに表示された入力欄を短くしてください。</p></div>
@@ -250,8 +318,8 @@ dialog .dialog-actions { display: flex; justify-content: flex-end; gap: 10px; ma
 <script>
 'use strict';
 // Standalone application: no libraries, network requests, rosters, or child records.
-const STORAGE_KEY = 'daily_reflection_paper_v4';
-const LEGACY_KEYS = ['absence_day_reflection_v3', 'absence_day_reflection_v2', 'absence_day_student_reflection_v2'];
+const STORAGE_KEY = 'daily_reflection_paper_v5';
+const LEGACY_KEYS = ['daily_reflection_paper_v4','absence_day_reflection_v3', 'absence_day_reflection_v2', 'absence_day_student_reflection_v2'];
 const SLOT_DEFS = [
   {id:'morning', label:'朝', subject:'朝の会'},
   {id:'p1', label:'1時間目', subject:''},
@@ -264,7 +332,7 @@ const SLOT_DEFS = [
   {id:'p6', label:'6時間目', subject:''}
 ];
 const $ = id => document.getElementById(id);
-let data, scaleMode = 'fit', saveTimer = 0, fitFrame = 0, toastTimer = 0;
+let data, scaleMode = 'fit', outputMode = 'student', saveTimer = 0, fitFrame = 0, toastTimer = 0;
 let layoutErrors = [], storageAvailable = true, restoredLegacy = false, loadProblem = '';
 let previousTitle = document.title;
 
@@ -273,7 +341,7 @@ function localToday() {
   return [now.getFullYear(), String(now.getMonth()+1).padStart(2,'0'), String(now.getDate()).padStart(2,'0')].join('-');
 }
 function emptyData() {
-  return { date:localToday(), grade:'', className:'', teacherMessage:'', schedule:Object.fromEntries(SLOT_DEFS.map(s=>[s.id,{subject:s.subject,task:'',note:''}])) };
+  return { date:localToday(), grade:'', className:'', teacherName:'', leaveTime:'', teacherMessage:'', beforeTask:'', afterTask:'', adminNotes:'', schedule:Object.fromEntries(SLOT_DEFS.map(s=>[s.id,{subject:s.subject,task:'',note:''}])) };
 }
 function isObject(value) { return value !== null && typeof value === 'object' && !Array.isArray(value); }
 function validDate(value) {
@@ -285,11 +353,11 @@ function validDate(value) {
 }
 function validateData(input) {
   if (!isObject(input)) throw new Error('設定ファイルの形式を確認してください。');
-  if (input.version != null && input.version !== 4) throw new Error('このバージョンの設定ファイルには対応していません。');
+  if (input.version != null && ![4,5].includes(input.version)) throw new Error('このバージョンの設定ファイルには対応していません。');
   const source = input.app === 'daily-reflection-paper' ? input.data : input;
   if (!isObject(source) || !isObject(source.schedule)) throw new Error('ふりかえりシートの設定ファイルではありません。');
   const out = emptyData();
-  const limits = {date:10, grade:30, className:30, teacherMessage:2000};
+  const limits = {date:10, grade:30, className:30, teacherName:50, leaveTime:5, teacherMessage:2000, beforeTask:2000, afterTask:2000, adminNotes:3000};
   for (const key of Object.keys(limits)) {
     if (source[key] !== undefined) {
       if (typeof source[key] !== 'string' || source[key].length > limits[key]) throw new Error(key+' の内容が正しくありません。');
@@ -297,6 +365,7 @@ function validateData(input) {
     }
   }
   if (!validDate(out.date)) throw new Error('日付が正しくありません。');
+  if (out.leaveTime && !/^([01]\d|2[0-3]):[0-5]\d$/.test(out.leaveTime)) throw new Error('教室を出る時刻が正しくありません。');
   for (const s of SLOT_DEFS) {
     if (source.schedule[s.id] === undefined) continue;
     const row = source.schedule[s.id];
@@ -358,9 +427,22 @@ function buildEditors() {
       <td><div class="ratings" aria-label="よくできた・だいたいできた・もう少し">◎ ○ △</div></td>
       <td><div class="memo-box">${s.id==='lunch'?'<div class="lunch-check"><span><i class="check-square" aria-hidden="true"></i>準備</span><span><i class="check-square" aria-hidden="true"></i>片付け</span></div>':'<div class="memo-line"></div>'}<div class="memo-line"></div></div></td>
     </tr>`).join('');
+  const form2Defs = [
+    {id:'before',label:'業　前',fixed:true},
+    {id:'morning',label:'朝の会',fixed:true},
+    {id:'p1',label:'1'}, {id:'p2',label:'2'}, {id:'p3',label:'3'}, {id:'p4',label:'4'},
+    {id:'lunch',label:'給　食',fixed:true}, {id:'cleaning',label:'清　掃',fixed:true},
+    {id:'p5',label:'5'}, {id:'p6',label:'6'}, {id:'after',label:'帰りの会',fixed:true}, {id:'contact',label:'連絡事項',fixed:true}
+  ];
+  $('form2Rows').innerHTML = form2Defs.map(r=>{
+    const compact = ['before','morning','lunch','cleaning','after'].includes(r.id) ? 'compact' : (r.id==='contact'?'contact':'std');
+    const subject = (!r.fixed && r.id!=='contact') ? `<span class="subject-text" id="form2_subject_${r.id}"></span>` : '';
+    if (r.fixed) return `<tr class="${compact}"><th class="time" colspan="2" scope="row">${r.label}</th><td class="content"><span id="form2_content_${r.id}"></span></td><td class="relief"><div class="management-blank"></div></td></tr>`;
+    return `<tr class="${compact}"><th class="time" scope="row">${r.label}</th><td class="subject">${subject}</td><td class="content"><span id="form2_content_${r.id}"></span></td><td class="relief"><div class="management-blank"></div></td></tr>`;
+  }).join('');
 }
 function fillEditors() {
-  for (const key of ['date','grade','className','teacherMessage']) $(key).value = data[key];
+  for (const key of ['date','grade','className','teacherName','leaveTime','teacherMessage','beforeTask','afterTask','adminNotes']) $(key).value = data[key];
   for (const s of SLOT_DEFS) for (const key of ['subject','task','note']) $(key+'_'+s.id).value = data.schedule[s.id][key];
 }
 function formatDate(value) {
@@ -368,7 +450,31 @@ function formatDate(value) {
   const date = new Date(value+'T12:00:00');
   return `${date.getFullYear()}年${date.getMonth()+1}月${date.getDate()}日（${'日月火水木金土'[date.getDay()]}）`;
 }
+function form2DateText(value) {
+  if (!value || !validDate(value)) return '　月　日（　）';
+  const d = new Date(value+'T12:00:00');
+  return `${d.getMonth()+1}月${d.getDate()}日（${'日月火水木金土'[d.getDay()]}）`;
+}
+function renderForm2() {
+  $('form2Date').textContent = form2DateText(data.date);
+  $('form2Grade').textContent = (data.grade||'').replace(/年/g,'').trim() || '　';
+  $('form2Class').textContent = (data.className||'').replace(/組/g,'').trim() || '　';
+  $('form2Teacher').textContent = data.teacherName || '';
+  if (data.leaveTime) {
+    const [h,m] = data.leaveTime.split(':');
+    $('form2Away').textContent = `${Number(h)}時${m}分ごろ`;
+  } else $('form2Away').textContent = '1日不在';
+  const content = row => [row.task.trim(), row.note.trim()].filter(Boolean).join('\n');
+  for (const s of SLOT_DEFS) {
+    const sub=$('form2_subject_'+s.id); if (sub) sub.textContent=data.schedule[s.id].subject;
+    const out=$('form2_content_'+s.id); if (out) out.textContent=content(data.schedule[s.id]);
+  }
+  $('form2_content_before').textContent=data.beforeTask||'';
+  $('form2_content_after').textContent=data.afterTask||'';
+  $('form2_content_contact').textContent=data.adminNotes||'';
+}
 function render() {
+  renderForm2();
   $('outDate').textContent = formatDate(data.date);
   $('outClass').textContent = [data.grade.trim(),data.className.trim()].filter(Boolean).join('　') || '　　 年　　 組';
   $('outMessage').textContent = data.teacherMessage;
@@ -426,25 +532,27 @@ function fitPreview() {
   const viewport = $('previewViewport');
   const style = getComputedStyle(viewport);
   const width = viewport.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
-  const sheet = $('sheet');
+  const sheet = outputMode==='form2' ? $('form2Sheet') : $('sheet');
+  const other = outputMode==='form2' ? $('sheet') : $('form2Sheet');
+  other.style.transform='none';
   const scale = scaleMode==='actual' ? 1 : Math.min(1,Math.max(.1,width/sheet.offsetWidth));
   sheet.style.transform = `scale(${scale})`;
   $('paperHolder').style.width = (sheet.offsetWidth*scale)+'px';
   $('paperHolder').style.height = (sheet.offsetHeight*scale)+'px';
 }
 function printSheet() {
-  if (!fitAllText()) {
+  if (outputMode==='student' && !fitAllText()) {
     toast('枠に入らない文章があります。表示された入力欄を短くしてください。');
     $(layoutErrors[0].field)?.focus();
     return;
   }
   saveDraft();
   previousTitle = document.title;
-  document.title = '一日のふりかえり_'+(data.date||'日付未設定')+'_'+[data.grade,data.className].join('');
+  document.title = (outputMode==='form2'?'補欠計画_':'一日のふりかえり_')+(data.date||'日付未設定')+'_'+[data.grade,data.className].join('');
   window.print();
 }
 function downloadSettings() {
-  const payload = {app:'daily-reflection-paper',version:4,data};
+  const payload = {app:'daily-reflection-paper',version:5,data};
   const blob = new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'});
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
@@ -463,6 +571,16 @@ async function importSettings(file) {
   } catch (err) { toast(err instanceof SyntaxError ? 'JSON形式の設定ファイルを選んでください。' : err.message); }
   finally { $('importFile').value = ''; }
 }
+function setOutputMode(mode) {
+  outputMode = mode === 'form2' ? 'form2' : 'student';
+  document.body.dataset.output = outputMode;
+  $('studentViewBtn').setAttribute('aria-pressed', String(outputMode==='student'));
+  $('form2ViewBtn').setAttribute('aria-pressed', String(outputMode==='form2'));
+  $('outputBadge').textContent = outputMode==='form2' ? '様式2・A4縦' : '児童用・A4縦';
+  $('previewDescription').textContent = outputMode==='form2' ? '管理職提出用「補欠計画（様式2）」を表示しています。' : '児童用「一日のふりかえり」を表示しています。';
+  $('printStatus').hidden = outputMode==='form2';
+  requestAnimationFrame(fitPreview);
+}
 function bindEvents() {
   document.querySelectorAll('[data-field], [data-slot]').forEach(el=>el.addEventListener('input',()=>{
     if (el.dataset.field) data[el.dataset.field] = el.value;
@@ -470,9 +588,11 @@ function bindEvents() {
     render(); clearTimeout(saveTimer); saveTimer=setTimeout(()=>saveDraft(),300);
   }));
   $('saveBtn').addEventListener('click',()=>saveDraft(true));
+  $('studentViewBtn').addEventListener('click',()=>setOutputMode('student'));
+  $('form2ViewBtn').addEventListener('click',()=>setOutputMode('form2'));
   $('printBtn').addEventListener('click',printSheet);
   $('pdfBtn').addEventListener('click',()=>{
-    if (!fitAllText()) { toast('文章が枠に入るように調整してから、PDF保存してください。'); $(layoutErrors[0].field)?.focus(); return; }
+    if (outputMode==='student' && !fitAllText()) { toast('文章が枠に入るように調整してから、PDF保存してください。'); $(layoutErrors[0].field)?.focus(); return; }
     if (typeof $('pdfDialog').showModal==='function') $('pdfDialog').showModal();
     else { if(confirm('印刷画面で「PDFに保存」を選んでください。印刷画面を開きますか？')) printSheet(); }
   });
@@ -485,17 +605,18 @@ function bindEvents() {
   $('importFile').addEventListener('change',()=>importSettings($('importFile').files[0]));
   $('resetBtn').addEventListener('click',()=>{
     if (!confirm('学年・組を残して、新しいシートにします。現在の課題やメッセージは消去されます。よろしいですか？')) return;
-    const old=data; data=emptyData();data.grade=old.grade;data.className=old.className;
+    const old=data; data=emptyData();data.grade=old.grade;data.className=old.className;data.teacherName=old.teacherName;
     fillEditors();render();saveDraft();toast('新しいシートを作りました。');
   });
-  window.addEventListener('beforeprint',()=>{cancelAnimationFrame(fitFrame);fitAllText();});
+  window.addEventListener('beforeprint',()=>{cancelAnimationFrame(fitFrame);if(outputMode==='student')fitAllText();});
   window.addEventListener('afterprint',()=>{document.title=previousTitle;requestAnimationFrame(fitPreview);});
   window.addEventListener('resize',fitPreview);
   if ('ResizeObserver' in window) new ResizeObserver(fitPreview).observe($('previewViewport'));
   // Flush a pending edit on tab close, without making page loading itself overwrite an invalid draft.
   window.addEventListener('pagehide',()=>{if(saveTimer)saveDraft();});
 }
-buildEditors(); data=loadDraft(); fillEditors();bindEvents();render();fitPreview();
+document.body.dataset.output='student';
+buildEditors(); data=loadDraft(); fillEditors();bindEvents();render();setOutputMode('student');fitPreview();
 if (!storageAvailable) $('saveStatus').textContent='この環境では自動保存できません。「設定を書き出す」で保存してください。';
 else if (loadProblem) $('saveStatus').textContent=loadProblem;
 else $('saveStatus').textContent=restoredLegacy?'前のバージョンの入力を引き継ぎました。変更すると自動保存します。':'入力すると、このブラウザに自動保存します。他の端末には同期されません。';
